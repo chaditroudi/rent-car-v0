@@ -1,0 +1,37 @@
+
+
+@import "vendors/scrollable";
+@import "vendors/sticky";
+
+@import '../scss/utils/variables';
+
+@import "style.scss";
+
+
+/* Toastr */
+@import "/node_modules/ngx-toastr/toastr.css";
+
+// Ngx-Tabset
+@import "/node_modules/ngx-tabset/ngx-tabset.scss";
+
+/* Dragula */
+
+
+/* Leaflet Map */
+
+/* Scrollbar */
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+
+// overlay
+@import "@angular/cdk/overlay-prebuilt.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+/* ---------------------
+	*** Theme Scss ***
+-----------------------*/
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "../scss/vendors/themify.scss";
+@import "style.scss";
+@import "responsive";
+@import "../scss//base/reset.scss"

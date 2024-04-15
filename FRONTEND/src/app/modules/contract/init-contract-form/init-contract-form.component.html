@@ -1,0 +1,176 @@
+<form class="theme-form mega-form" [formGroup]="contractForm">
+  <div class="col-md-12">
+    <ul class="action">
+      <li class="plus">
+        <a (click)="createContract()"><i class="icon-plus"></i> </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="mb-3">
+        <label class="col-form-label">No</label>
+        <input class="form-control" type="text" placeholder="No"[value]='autoInc' />
+      </div>
+    </div>
+  
+    <div class="col-md-3">
+      <div class="mb-3">
+        <label class="col-form-label">Version</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Version"
+          formControlName="version"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="col-form-label">Sponsor/Driver</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Sponsor"
+          formControlName="sponsor"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-6">
+    <div class="col-md-3">
+      <div class="mb-3">
+        <label class="col-form-label">Car out</label>
+        <input
+          class="form-control"
+          type="datetime-local"
+          formControlName="car_out"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="mb-3">
+        <label class="col-form-label">Days</label>
+        <input class="form-control" type="number" formControlName="days" 
+        (ngModelChange)="onChangePaymentDays($event)"
+        
+        />
+
+        <span>02/02/2024</span>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="mb-3">
+        <label class="col-form-label">Car back</label>
+        <input
+          class="form-control"
+          type="datetime-local"
+          formControlName="car_back"
+        />
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="mb-3">
+        <label class="col-form-label"></label>
+        <div class="form-check checkbox checkbox-solid-primary">
+          <input
+            class="form-check-input"
+            id="solid3"
+            type="checkbox"
+            checked=""
+          />
+          <label class="form-check-label" for="solid3"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="mb-3">
+        <label class="col-form-label">Car</label>
+        <div class="d-flex">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Car"
+            formControlName="car"
+          />
+          <button
+            class="btn btn-outline-primary btn-xs"
+            (click)="openCarModal()"
+          >
+            Choose
+          </button>
+        </div>
+      </div>
+    </div>
+
+   
+
+ 
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="col-form-label">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="No"
+          formControlName="location"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="mb-3">
+        <label class="col-form-label">Hirer</label>
+        <div class="d-flex">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Hirer"
+            formControlName="owner"
+          />
+          <button
+            class="btn btn-outline-primary btn-xs"
+            (click)="openCustomerModal()"
+          >
+            Choose
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+ 
+</form>
+<div class="card-body">
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Our Available Cars</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        (click)="modal.close('Save click')"
+        type="button"
+        placement="top"
+        ngbtooltip="btn btn-light"
+        class="btn btn-light active txt-dark"
+      >
+        Close
+      </button>
+    </div>
+  </ng-template>
+</div>

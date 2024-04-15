@@ -1,0 +1,125 @@
+<app-breadcrumb [title]="'Invoice'" [items]="['Apps', 'Ecommerce']" [active_item]="'Invoice'"></app-breadcrumb>
+<div class="container ">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="text-start">
+          <button class="btn btn-dark-outline" >Return</button>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-primary" appGeneratePdf [contentToConvert]="contentToConvert" >Generate PDF</button>
+
+        </div>
+      </div>
+      <div id="contentToConvert">
+
+
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <h1>INVOICE</h1>
+    </div>
+    <div class="invoice-body">
+      <div class="customer-section">
+        <div class="customer-id">
+          <span>Customer Passport {{contract.owner?.passport_number}}</span>
+          <div class="text-end">
+            <qr-code value="{{contract.owner?.passport_number}}" size="50" errorCorrectionLevel="M"></qr-code>
+
+          </div>
+        </div>
+        <div class="customer-info">
+         
+
+          <div class="customer-name">
+            <span>FullName:</span><p>MR {{contract.owner?.fullName}}</p>
+            <span>Mobile: </span><p>
+              {{contract.owner?.mobile}}</p>
+            <span>Address:</span><p>{{contract.owner?.QAR_address}}</p>
+          </div>
+          <img src="../../../../assets/images/user.jpg" alt="Customer" class="customer-silhouette">
+        </div>
+      </div>
+      <div class="contract-section">
+        <div class="contract-info">
+          <qr-code value="{{contract.car?.plate}}" size="50" errorCorrectionLevel="M"></qr-code>
+          <div class="contract-details">
+            <p>{{contract.car?.car+' '+contract.car?.year+' '+contract.car?.plate}}</p>
+            <p>{{contract.car_out | date :'yyyy-mm-dd HH:mm'}} -> {{contract.car_back  | date :'yyyy-mm-dd HH:mm'}}</p>
+          </div>
+          <img src="../../../../assets/images/invoice/car_invoice.png" alt="Car" class="car-image">
+        </div>
+      </div>
+      <div class="payment-section">
+        <table class="table table-striped payment-table">
+          <tr>
+            <th>Payment</th>
+            <th>{{contract.daily_val1}}</th>
+            <th>x</th>
+            <th>{{price}}</th>
+            <th>=</th>
+            <th>{{contract.daily_val1 * price}}</th>
+          </tr>
+          <tr>
+            <td>Monthly</td>
+            <td colspan="5" class="highlight">1 500,00</td>
+          </tr>
+          <tr>
+            <td>Overtime:</td>
+            <td colspan="5" class="highlight"></td>
+          </tr>
+          <tr>
+            <td>Driver / Petrol:</td>
+            <td colspan="5" class="highlight"></td>
+          </tr>
+          <tr>
+            <td>Fines:</td>
+            <td colspan="5" class="highlight"></td>
+          </tr>
+          <tr>
+            <td>Overdrive / Other:</td>
+            <td colspan="5" class="highlight"></td>
+          </tr>
+          <tr>
+            <td>VAT:</td>
+            <td colspan="5" class="highlight"></td>
+          </tr>
+          <tr class="totals">
+            <td>Sum:</td>
+            <td colspan="5" class="highlight">{{contract.sum}}</td>
+          </tr>
+          <tr class="totals">
+            <td>Discount:</td>
+            <td colspan="5" class="highlight">{{contract.discount}}</td>
+          </tr>
+          <tr class="totals">
+            <td>Advance:</td>
+            <td colspan="5" class="highlight">{{contract.advance}}</td>
+          </tr>
+          <tr class="totals">
+            <td>Payable:</td>
+            <td colspan="5" class="highlight">{{contract.payable}}</td>
+          </tr>
+        </table>
+      </div>
+    
+      <div class="card-footer">
+        <div class="invoice-footer">
+          <p style="text-align: left;">DHOA VISION RENT A CAR</p>
+          <p style="text-align: right;">Customer</p>
+        
+      </div>
+    </div>
+    </div>
+   
+    
+
+  
+      </div>
+    </div>
+ 
+
+
+
+</div>
+</div>
+

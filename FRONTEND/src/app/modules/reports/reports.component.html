@@ -1,0 +1,107 @@
+<app-breadcrumb
+  [title]="'Reports Page'"
+  [items]="['Forms', 'Form Layout']"
+  [active_item]="'Contracts Page'"
+></app-breadcrumb>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="text-primary">Rented Cars</h5>
+        </div>
+        <div class="card-body">
+          <div class="product-list-custom custom-datatable">
+            <div *ngIf="cars.length > 0; else noData">
+         <div id="printRented">
+            <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Code</th>
+                      <th scope="col">Car</th>
+                      <th scope="col">Year</th>
+                      <th scope="col">Plate</th>
+                      <th scope="col">Daily</th>
+                      <th scope="col">Print</th>
+              
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let item of carsRented">
+                    <tr>
+                      <td>{{ item.code }}</td>
+                      <td>{{ item.car }}</td>
+                      <td>{{ item.year }}</td>
+                      <td>{{  item.plate }}</td>
+                      <td>{{ item.daily }}</td>
+                      <td> <a appGeneratePdf printRented="printRented" [dataR]="carsRented"
+                        ><i class="icon-printer mb-3"></i
+                      ></a></td>
+                    
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+         </div>
+            </div>
+            <ng-template #noData>
+              <div class="alert alert-light">
+                <p>Cars rented not found.</p>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="text-success">Available Cars</h5>
+          </div>
+          <div class="card-body">
+            <div class="product-list-custom custom-datatable">
+              <div *ngIf="cars.length > 0; else noData">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Serial</th>
+                        <th scope="col">Version</th>
+                        <th scope="col">Days</th>
+                        <th scope="col">Car</th>
+                        <th scope="col">Daily</th>
+                
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let item of cars">
+                      <tr>
+                        <td>{{ item.code }}</td>
+                        <td>{{ item.car }}</td>
+                        <td>{{ item.year }}</td>
+                        <td>{{  item.plate }}</td>
+                        <td>{{ item.daily }}</td>
+                      
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <ng-template #noData>
+                <div class="alert alert-light">
+                  <p>Cars rented not found.</p>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
