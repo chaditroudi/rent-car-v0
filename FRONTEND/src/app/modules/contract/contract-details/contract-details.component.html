@@ -110,7 +110,7 @@
                               'text-danger': c.status === 'Contract is Open',
                               'text-success': c.status === 'Contract is Closed'
                             }"
-                            >{{ mycb.checked ? status : c.status }} 
+                            >{{ mycb.checked ? status : c.status }}
                           </span>
                         </h5>
                       </div>
@@ -237,7 +237,6 @@
                               type="checkbox"
                               #mycb
                               (click)="onCarBackEvent(mycb.checked)"
-                         
                             />
                             <label
                               class="form-check-label"
@@ -249,12 +248,10 @@
                     </div>
 
                     <div class="row g-4">
-                      
                       <div class="col-md-3">
                         <div class="mb-3">
                           <label class="col-form-label">Car</label>
                           <div class="d-flex">
-                            
                             <input
                               class="form-control"
                               type="text"
@@ -530,12 +527,17 @@
                                         >
                                           <input
                                             type="checkbox"
-                                            [(ngModel)]="item.checked"
+                                            [(ngModel)]="
+                                              item.checked
+                                            "
                                             [ngModelOptions]="{
                                               standalone: true
                                             }"
-                                            (change)="onCheckboxChange()"
+                                            (change)="
+                                              onCheckboxChange()
+                                            "
                                             class="checkbox_animated"
+
                                           />
                                           {{ item.label }}
                                         </label>
@@ -916,7 +918,7 @@
                                 class="custom-pagination"
                                 (pageChange)="p = $event"
                                 (pageChange)="pageChanged($event)"
-                      (pageBoundsCorrection)="pageChanged($event)"
+                                (pageBoundsCorrection)="pageChanged($event)"
                                 maxSize="10"
                                 directionLinks="true"
                                 autoHide="true"

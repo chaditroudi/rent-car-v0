@@ -12,6 +12,7 @@ import { CarService } from "src/app/core/services/car.service";
 export class ReportsComponent implements OnInit {
   cars :any[] = [];
   carsRented:any[] = [];
+  carsA:any[] = [];
 
 
   
@@ -35,7 +36,8 @@ export class ReportsComponent implements OnInit {
 
         if (car.rented == true) {
                   this.carsRented.push(car);
-                }
+                }else 
+                this.carsA.push(car);
       })
 
 

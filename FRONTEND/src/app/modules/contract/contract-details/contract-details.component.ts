@@ -105,6 +105,11 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     this.loadData();
     this.fetchAllCustomers();
     this.fetchAllCars();
+
+
+
+
+    
   }
   ngOnChanges(): void {
     this.loadData();
@@ -306,7 +311,22 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     this.contractService.contracts$.subscribe((res) => {
       this.formData = res;
 
-      console.log(this.formData);
+
+      this.formData.map((data)=> {
+    
+
+        this.checkboxItems.map((item,index)=> {
+
+          if(data.features == item.label) {
+
+            item.checked == true;
+
+            
+
+          }
+        });
+        
+      })
     });
     [];
   }

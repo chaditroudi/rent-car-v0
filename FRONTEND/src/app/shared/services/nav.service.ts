@@ -99,9 +99,11 @@ export class NavService implements OnDestroy {
         {
           headTitle1: "Pages",
         },
+        { path: "/modules/dashboard", icon: "home", title: "Dashboard", type: "link", bookmark: true },
+
         {
           title: "Cars",
-          icon: "home",
+          icon: "truck",
           type: "sub",
           badgeType: "light-primary",
           badgeValue: "1",
@@ -127,7 +129,7 @@ export class NavService implements OnDestroy {
         },
         {
           title: "Customers",
-          icon: "users",
+          icon: "user",
           type: "sub",
           badgeType: "light-primary",
           badgeValue: "1",
@@ -137,7 +139,7 @@ export class NavService implements OnDestroy {
           ],
         },
         {  title: "Permission",
-        icon: "activity",
+        icon: "list",
         type: "sub",
         badgeType: "light-primary",
         badgeValue: "1",
@@ -155,6 +157,8 @@ export class NavService implements OnDestroy {
         {
           headTitle1: "Pages",
         },
+        { path: "/modules/dashboard", icon: "home", title: "Dashboard", type: "link", bookmark: true },
+
         {
           title: "Cars",
           icon: "home",
@@ -168,7 +172,7 @@ export class NavService implements OnDestroy {
         },
         {
           title: "Contract",
-          icon: "user",
+          icon: "layout",
           type: "sub",
           badgeType: "light-primary",
           badgeValue: "1",
@@ -180,8 +184,8 @@ export class NavService implements OnDestroy {
         },
         {
           title: "Reports",
-          icon: "reports",
-          type: "sub",
+          icon: "layout",
+          type: "widget",
           badgeType: "light-primary",
           badgeValue: "1",
           active: false,
@@ -202,8 +206,8 @@ export class NavService implements OnDestroy {
         
         {
           title: "Reports",
-          icon: "reports",
-          type: "sub",
+          icon: "layout",
+          type: "sub" ,
           badgeType: "light-primary",
           badgeValue: "1",
           active: false,

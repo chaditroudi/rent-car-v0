@@ -47,7 +47,7 @@
                   <label class="badge badge-{{ menuItem.badgeType }}" *ngIf="menuItem.badgeType && menuItem.badgeValue">{{ menuItem.badgeValue }}</label>
                   <!-- Sub -->
                   <a href="javascript:void(0)" class="sidebar-link sidebar-title" [class.link-nav]="!menuItem.children" [ngClass]="{ active: menuItem.active }" *ngIf="menuItem.type === 'sub'" (click)="toggletNavActive(menuItem)">
-                    <app-svg-icon [icon]="menuItem.icon"></app-svg-icon>
+                    <app-feather-icons [icon]="menuItem.icon"></app-feather-icons>
                     <span>{{ menuItem.title | translate }}</span>
                     <div class="according-menu">
                       <i class="fa fa-angle-{{ menuItem.active ? 'down' : 'right' }} pull-right" *ngIf="menuItem.children"></i>
@@ -55,7 +55,7 @@
                   </a>
                   <!-- Link -->
                   <a [routerLink]="!menuItem.type ? null : [menuItem.path]" routerLinkActive="active" class="sidebar-link sidebar-title" [class.link-nav]="!menuItem.children" [ngClass]="{ active: menuItem.active }" *ngIf="menuItem.type === 'link'">
-                    <app-svg-icon [icon]="menuItem.icon"></app-svg-icon>
+                    <app-feather-icons [icon]="menuItem.icon"></app-feather-icons>
                     <span>{{ menuItem.title | translate }}</span>
                     <div class="according-menu">
                       <i class="fa fa-angle-{{ menuItem.active ? 'down' : 'right' }} pull-right" *ngIf="menuItem.children"></i>

@@ -1,10 +1,11 @@
+import { Features } from 'src/app/core/models/contract.model';
 import { Contract } from "./contract.model";
 
 export function createUpdatedContract(
     inputsValue: string[],
     carId: any,
     customerId:any,
-    selectedItems: string[],
+    selectedItems: any[],
     status: string,
     res: any
   ): Contract {

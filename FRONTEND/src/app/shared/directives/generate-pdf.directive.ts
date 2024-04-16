@@ -33,11 +33,18 @@ export class GeneratePdfDirective {
   @Input()
   printRented:any;
 
+  
+  @Input()
+  printA:any;
+
 
   @Input()
   dataR:Car[] = []
 
   
+
+  @Input()
+  dataA:Car[] = []
 
   generatePDF() {
 
@@ -46,6 +53,7 @@ export class GeneratePdfDirective {
 
 
     var printRented = document.getElementById(this.printRented);
+    var printA = document.getElementById(this.printA);
     var data = document.getElementById(this.contentToConvert);
 
 
@@ -61,6 +69,19 @@ export class GeneratePdfDirective {
       });
 
       doc.save('rented_car_reports.pdf');
+    } 
+    else if(printA !==null) {
+      
+      const doc = new jsPDF('portrait','px','a4') as jsPDFWithPlugin;
+
+      doc.autoTable({
+        head: [['code', 'car','year', 'plate','daily']],
+        body: this.dataA.map(object => {
+          return [object.code, object.car, object.year, object.plate,object.daily];
+        }),
+      });
+
+      doc.save('available_car_reports.pdf');
     }
 
 

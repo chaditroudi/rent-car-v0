@@ -89,7 +89,7 @@ const contractSchema = new mongoose.Schema({
       },
       features:{
           type:Array,
-          required: false
+          required: false,
       },
       daily_val1:{
         type:Number,

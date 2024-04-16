@@ -185,13 +185,23 @@ exports.getAllContractsBackups = async (req, res) => {
         $group: {
           _id: "$data.serial",
           doc: { $first: "$$ROOT" },
+          
         },
       },
       {
         $replaceRoot: { newRoot: "$doc" },
       },
-    ]);
+      {
+        $lookup:{
+          from:'Car',
+          localField:'data.car',
+          foreignField:'_id',
+          as:'car'
+        }
+      }
+    ])
 
+    console.log("car",contracts);
     return res.status(200).json(contracts);
   } catch (error) {
     return res.status(400).json({ status: 400, message: error.message });
