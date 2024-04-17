@@ -84,12 +84,10 @@
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-              <div *ngIf="formData.length > 0">
                 <div class="text-end">
                   <button (click)="resetForm()" class="btn btn-success">
                     {{ buttonAdd }}
                   </button>
-                </div>
               </div>
             </div>
 
@@ -117,9 +115,21 @@
                       <div class="col-md-12">
                         <ul class="action">
                           <li class="edit">
-                            <a (click)="updateContract(c._id)"
+                            <a (click)="openEditContractModal()"
                               ><i class="icon-pencil-alt"></i
                             ></a>
+
+                            <confirmation-modal
+                            #editContractModal
+                            (newConfirmationEvent)="
+                              editContractAlert($event, c._id)
+                            "
+                            modalStyle="modal-style-info"
+                            modalTitle="Edit contract"
+                            modalBody="you have payments available are you sure to update ?"
+                            modalButtonColor="btn btn-info"
+                            
+                          ></confirmation-modal>
                           </li>
                           <li class="delete">
                             <a (click)="open()"
@@ -130,10 +140,10 @@
                                 (newConfirmationEvent)="
                                   getConfirmationValue($event, c._id)
                                 "
-                                [modalStyle]="modalStyle"
-                                [modalTitle]="modalTitle"
-                                [modalBody]="modalBody"
-                                [modalButtonColor]="modalButtonColor"
+                                    modalStyle="modal-style-info"
+                                    modalTitle="Delete contract"
+                                    modalBody="are you sure to delete contract?"
+                                    modalButtonColor="btn btn-danger"
                               ></confirmation-modal>
                             </a>
                           </li>

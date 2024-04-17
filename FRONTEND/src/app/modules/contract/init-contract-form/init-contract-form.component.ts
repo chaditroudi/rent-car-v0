@@ -35,6 +35,12 @@ export class InitContractFormComponent implements OnInit {
 
   customerData = [];
   contractForm: FormGroup;
+    
+  public active1 = 1;
+  public active2 = 1;
+  public active3 = 1;
+  public active4 = 1;
+  disabled = true;
 
   car_id:any;
   customer_id:any
@@ -77,11 +83,8 @@ export class InitContractFormComponent implements OnInit {
     
   }
 
-  public active1 = 1;
-  public active2 = 1;
-  public active3 = 1;
-  public active4 = 1;
-  disabled = true;
+
+
 
   onNavChange1(changeEvent: NgbNavChangeEvent) {
     if (changeEvent.nextId === 4) {
@@ -198,7 +201,8 @@ export class InitContractFormComponent implements OnInit {
   }
   openCustomerModal() {
     // this.openSearchModal();
-    const modalRef = this.modalService.open(CustomerModalComponent);
+    const modalRef = this.modalService.open(CustomerModalComponent,{      size: "xl",
+  });
     modalRef.componentInstance.customerData = this.customerData;
 
     modalRef.componentInstance.customerSelected.subscribe((selectedCust:Customer) => {
@@ -222,4 +226,5 @@ export class InitContractFormComponent implements OnInit {
    let days =  this.contractForm.controls["days"].value;
     this.contractForm.controls["daily_val1"].setValue(days)
   }
+  
 }

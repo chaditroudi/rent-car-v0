@@ -24,9 +24,24 @@ exports.createContract = async (req, res) => {
       serial: autoInc,
       car_out: car_out,
       car_back: car_back,
-      status:'Contract is Open'
+      status:'Contract is Open',
+      rented:true
     });
     const result = await contract.save();
+
+
+    Car.findByIdAndUpdate(req.body.car, { $set:{rented: true }}).then(car => {
+      console.log("current car to update",car);
+    })
+    
+
+    return res.status(200).json({
+      status: 200,
+      data: contract,
+      message: "Successfully updated Contract",
+    });
+
+  
 
     return res.status(201).json(result);
   } catch (err) {

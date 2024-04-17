@@ -210,7 +210,20 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     });
   }
 
+
+  
+
+  async editContractAlert(value: any, ContractId: number) {
+    if (value == "Yes") {
+      this.updateContract(ContractId);
+      console.log("first");
+    }
+  }
+
   updateContract(contractId: number) {
+    
+    
+    
     this.contractService
       .get(contractId)
       .pipe(
@@ -229,6 +242,7 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
             res
           );
 
+          
           return this.contractService.update(contractId, updatedContract);
         })
       )
@@ -261,6 +275,7 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
   deleteContract(ContractId: number): void {
     this.contractService.delete(ContractId).subscribe(
       () => {
+        this.loadData()
         this.toastr.showSuccess("Contract deleted successfully");
       },
       (err) => {
@@ -386,17 +401,31 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     this.inputsValue[24] = this.inputsum.nativeElement.value;
   }
 
-  @ViewChild("confirmationModal")
+  @ViewChild("confirmationModal") 
+  
   private modalComponent!: ConfirmationModalComponent;
 
-  modalStyle: string = "modal-style-success";
-  modalTitle: string = "Success Confirmation";
-  modalBody: string = "This is a Success Confirmation message";
-  modalButtonColor: string = "btn-success";
+  @ViewChild("editContractModal")
+
+  private editContractModal!: ConfirmationModalComponent;
+
+
+  async openEditContractModal() {
+    return await this.editContractModal.open();
+  }
+  
+
+
+
 
   async openModal() {
     return await this.modalComponent.open();
   }
+
+
+
+
+
 
   async getConfirmationValue(value: any, ContractId: number) {
     if (value == "Yes") {

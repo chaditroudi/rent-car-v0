@@ -28,7 +28,7 @@ const registerUser = async(req, res) => {
             });
         }
         
-        const { name, email, password } = req.body;
+        const { name, email, password,role } = req.body;
 
         const isExistUser = await User.findOne({ email })
 
@@ -44,12 +44,13 @@ const registerUser = async(req, res) => {
         const user = new User({
             name,
             email,
-            password:hashedPassword
+            password:hashedPassword,
+            role
         });
 
         const userData = await user.save();
 
-        // Assigning the Default Permissions to created User
+                    // Assigning the Default Permissions to created User
 
         const defaultPermissions = await Permission.find({
             is_default: 1
@@ -75,6 +76,7 @@ const registerUser = async(req, res) => {
 
             await userPermission.save();
 
+        
         }
 
         return res.status(200).json({
@@ -134,6 +136,7 @@ const loginUser = async(req, res) => {
         const user = {
             email: userData.email,
             role: userData.role,
+            _id:userData._id
 
         }
 

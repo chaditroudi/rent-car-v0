@@ -28,7 +28,8 @@ export class CustomerAddComponent implements OnInit {
     permanent_address: [''],
     person_name: [''],
     home_country: [''],
-    nationality: ['']
+    nationality: [''],
+  
   });
   constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,private readonly customerService:CustomerService) {
 

@@ -10,7 +10,8 @@ const contractSchema = new mongoose.Schema({
     
   },
 
-
+  rented:{type:Boolean}
+,
     status: { type: String },
 
   car:{

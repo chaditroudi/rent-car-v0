@@ -35,40 +35,48 @@
   </div>
 </ng-template> -->
 
-
 <ng-template #confirmationModal let-c="close" let-d="dismiss">
-  
-  <div class="modal fade show" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-modal="true" style="padding-right: 0px; display: block;">
+  <div
+    class="modal fade show"
+    id="exampleModalCenter1"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenter1"
+    aria-modal="true"
+    style="padding-right: 0px; display: block"
+  >
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-body"> 
-          <div class="modal-toggle-wrapper">  
-            <ul class="modal-img">
-            </ul>
-            <h4 class="text-center pb-2">{{modalTitle}}</h4>
+        <div class="modal-body">
+          <div class="modal-toggle-wrapper">
+            <ul class="modal-img"></ul>
+            <h4 class="text-center pb-2">{{ modalTitle }}</h4>
             <p class="text-center">
-                {{modalBody}}
-              </p>
-
-
-          
+              {{ modalBody }}
+            </p>
           </div>
 
           <div class="modal-footer">
-            <button class="btn btn-secondary d-flex m-auto" type="button" data-bs-dismiss="modal"
-            (click)="c('Yes')"
+            <button
+              [class]="modalButtonColor + ' d-flex m-auto'"
+              type="button"
+              data-bs-dismiss="modal"
+              (click)="c('Yes')"
+            >
+              Yes
+            </button>
 
-            >Yes</button>
-
-          <button class="btn btn-dark d-flex m-auto" type="button" data-bs-dismiss="modal"
-          (click)="d('No')"
-
-          >No</button>
+            <button
+              class="btn btn-light d-flex m-auto"
+              type="button"
+              data-bs-dismiss="modal"
+              (click)="d('No')"
+            >
+              No
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-    
-  </ng-template>
-  
+</ng-template>

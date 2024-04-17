@@ -29,7 +29,7 @@ export class CarDetailsComponent implements OnInit, OnChanges {
   modal: ModalComponent;
 
   carForm: FormGroup;
-
+  pageSize: number = 10;
   inputsValue: string[] = Array(30).fill("");
 
   ngOnInit(): void {
@@ -179,11 +179,27 @@ export class CarDetailsComponent implements OnInit, OnChanges {
         console.log(err);
       }
     );
+
+
   }
 
+  
+
   deleteCar(carId: number): void {
+
+    const index = this.formData.findIndex((car: Car) => car._id === carId);
+    if (index !== -1) {
+      this.formData.splice(index, 1);
+      if (this.formData.length % 1 === 0) {
+        this.currentPage--;
+        if (this.currentPage < 1) {
+          this.currentPage = 1;
+        } 
+      
+    }
     this.carService.delete(carId).subscribe(
       () => {
+        this.loadData();
         this.toastr.showSuccess("Car deleted successfully");
       },
       (err) => {
@@ -192,7 +208,7 @@ export class CarDetailsComponent implements OnInit, OnChanges {
       }
     );
   }
-
+  }
   loadData() {
     this.carService.getCars();
 

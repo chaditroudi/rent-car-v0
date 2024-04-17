@@ -10,10 +10,10 @@
       <div class="card">
         <div class="card-header">
           <h5 class="text-primary">Rented Cars</h5>
-          <div class="text-end">
-            <button type="button" class="btn btn-primary"> <a appGeneratePdf printRented="printRented" [dataR]="carsRented"
+          <div class="text-end"> 
+          <a appGeneratePdf printRented="printRented" [dataR]="carsRented" class="btn btn-primary"
              ><i class="icon-printer mb-3"></i
-           ></a></button>
+           ></a>btn btn-primary
            </div>
         </div>
         <div class="card-body">
@@ -67,9 +67,9 @@
           <div class="card-header">
             <h5 class="text-success">Available Cars</h5>
             <div class="text-end">
-              <button type="button" class="btn btn-primary"> <a appGeneratePdf printA="printA" [dataA]="carsA"
+            <a appGeneratePdf printA="printA" [dataA]="carsA" class="btn btn-primary"
                ><i class="icon-printer mb-3"></i
-             ></a></button>
+             ></a>
              </div>
           </div>
           <div class="card-body">
