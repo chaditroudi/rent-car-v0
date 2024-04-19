@@ -7,6 +7,7 @@ export function createUpdatedContract(
     customerId:any,
     selectedItems: any[],
     status: string,
+    status_contract: string,
     res: any
   ): Contract {
 
@@ -43,6 +44,7 @@ export function createUpdatedContract(
       advance: inputsValue[26] || res.advance,
       payable: inputsValue[27] || res.payable,
       amount: inputsValue[33] || res.amount,
+      status_contract:status_contract
       
     };
   }

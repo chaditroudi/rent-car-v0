@@ -73,3 +73,25 @@
 hr {
     color: $dark-border-color;
 }
+
+/* Default styles for the form inputs */
+.form-group {
+  margin-bottom: 10px; /* Add some bottom margin between inputs */
+}
+
+/* Media query for screens smaller than 576px (extra small devices) */
+@media (max-width: 575.98px) {
+  /* Override the default display of table cells to stack vertically */
+  table tbody tr td {
+    display: block;
+    width: 100%; /* Make each cell occupy the entire width */
+    clear: both; /* Clear any floating elements */
+    margin-bottom: 10px; /* Add some bottom margin between rows */
+  }
+
+  /* Display inputs inline */
+  table tbody tr td input {
+    display: inline-block;
+  }
+}
+

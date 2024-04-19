@@ -1,10 +1,10 @@
 export interface Car {
-    _id : number;
+    _id : string;
     code: number;
     year: number;
     plate:number,
     car: string;
-    
+    rented:boolean;
     insurance: string;
     registration: string;
     engine_no: string;

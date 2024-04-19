@@ -2,6 +2,7 @@ import { Car } from "./car.model";
 import { Customer } from "./customer.model";
 
 export interface Contract {
+  _id?:string;
     serial?: number;
     car: Car;
     version: number;
@@ -12,6 +13,7 @@ export interface Contract {
     deposit: string;
     location: string;
     owner: Customer;
+    status_contract:string;
     comments?: string;
     daily?: number;
     monthly?: number;

@@ -39,6 +39,8 @@ import { ConfirmationModalComponent } from "./components/confirmation-modal/conf
 import { DecimalFormatDirective } from './directives/decimal-format.directive';
 import { NumberInputDirective } from './directives/input-number.directive';
 import { FilterPipe } from './pipe/filter.pipe';
+import { UnauthorizedPageComponent } from './pages/errors/unauthorized-page/unauthorized-page.component';
+import { NotFoundPageComponent } from './pages/errors/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     ConfirmationModalComponent,
     DecimalFormatDirective,
     NumberInputDirective,
+    UnauthorizedPageComponent,
+    NotFoundPageComponent,
     
   ],
   imports: [
@@ -84,6 +88,7 @@ import { FilterPipe } from './pipe/filter.pipe';
     TranslateModule,
     ModalComponent,
     SearchComponent,
+    UnauthorizedPageComponent,
     DecimalFormatDirective,
 
     LoaderComponent,

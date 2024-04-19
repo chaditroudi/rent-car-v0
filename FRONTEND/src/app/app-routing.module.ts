@@ -6,6 +6,8 @@ import { content } from "./shared/routes/routes";
 import { ContentComponent } from './layout/content/content.component';
 import { FullComponent } from './layout/full/full.component';
 import { CarDetailsComponent } from './modules/cars/car-details/car-details.component';
+import { UnauthorizedPageComponent } from './shared/pages/errors/unauthorized-page/unauthorized-page.component';
+import { NotFoundPageComponent } from './shared/pages/errors/not-found-page/not-found-page.component';
 
 const routes: Routes = [
 
@@ -29,8 +31,14 @@ const routes: Routes = [
 
   },
   {
+
+    path:'forbidden',
+    component:UnauthorizedPageComponent
+  },
+  {
     path: "**",
-    redirectTo: "",
+    component:NotFoundPageComponent
+
   },
 ];
 

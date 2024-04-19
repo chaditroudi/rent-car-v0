@@ -11,11 +11,11 @@ router.get('/autoinc', contractController.getAutoInc,auth, OnlyAdminCanAccess);
 
 
 
-router.post('/', contractController.createContract,auth, OnlyAdminCanAccess,);
-router.get('/', contractController.getAllContracts,auth, OnlyAdminCanAccess,);
-router.put('/:id', contractController.updateContract,auth, OnlyAdminCanAccess,);
-router.delete('/:id', contractController.deleteContract,auth, OnlyAdminCanAccess,);
-router.get('/:id', contractController.getContractById,auth, OnlyAdminCanAccess,);
+router.post('/',auth, OnlyAdminCanAccess, contractController.createContract,);
+router.get('/', auth, OnlyAdminCanAccess,contractController.getAllContracts);
+router.put('/:id',auth, OnlyAdminCanAccess, contractController.updateContract);
+router.delete('/:id',auth, OnlyAdminCanAccess, contractController.deleteContract);
+router.get('/:id',auth, OnlyAdminCanAccess,contractController.getContractById);
 
 
 

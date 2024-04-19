@@ -11,6 +11,7 @@ import { PermissionsDetailsComponent } from "./permissions/permissions-details/p
 import { PermissionUpdateComponent } from "./permissions/permission-update/permission-update.component";
 import { MainComponent } from "./dashboard/main/main.component";
 import { ReportsComponent } from "./reports/reports.component";
+import { AdminEditorGuard, AdminGuard, AuthGuard, EditorGuard, ViewerGuard } from "../core/guards/index";
 
 const routes: Routes = [
   {
@@ -19,41 +20,58 @@ const routes: Routes = [
       {
         path: "cars/car-details",
         component: CarDetailsComponent,
+        canActivate: [AuthGuard,AdminEditorGuard]
       },
       {
         path: "dashboard",
         component: MainComponent,
+        canActivate: [AuthGuard]
+
       },
 
       {
         path:"reports",
-        component: ReportsComponent
+        component: ReportsComponent,
+        canActivate: [AuthGuard,ViewerGuard]
+
       },
 
       {
         path:"cars/cars-list",
-        component: CarsListComponent
+        component: CarsListComponent,
+        canActivate: [AuthGuard,AdminEditorGuard]
+
       },
       {
         path:"customers/customers-list",
-        component:CustomersListComponent
+        component:CustomersListComponent,
+        canActivate: [AuthGuard,AdminEditorGuard]
+
       },
       {
         path:"customers/customers-add",
-        component:CustomerAddComponent
+        component:CustomerAddComponent,
+        canActivate: [AuthGuard,AdminEditorGuard]
+
       },
       {
         path:"customers/customers-update/:id",
-        component:CustomerUpdateComponent
+        component:CustomerUpdateComponent,
+        canActivate: [AuthGuard,AdminGuard]
+
       },
     
       {
         path:"permissions/permissions-details",
-        component: PermissionsDetailsComponent
+        component: PermissionsDetailsComponent,
+        canActivate: [AuthGuard,AdminGuard]
+
       },
       {
         path:"permissions/permissions-update/:id",
-        component: PermissionUpdateComponent
+        component: PermissionUpdateComponent,
+        canActivate: [AuthGuard,AdminGuard]
+
       },
 
 

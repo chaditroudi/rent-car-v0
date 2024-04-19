@@ -15,9 +15,7 @@ exports.createContract = async (req, res) => {
     const autoInc = await autoIncrement(Contract,'serial');
     const car_out = formatDateTime(req.body.car_out);
     const car_back = formatDateTime(req.body.car_back);
-    console.log("hiii", car_out);
 
-    console.log(autoInc)
 
     const contract = new Contract({
       ...req.body,
@@ -25,7 +23,6 @@ exports.createContract = async (req, res) => {
       car_out: car_out,
       car_back: car_back,
       status:'Contract is Open',
-      rented:true
     });
     const result = await contract.save();
 
@@ -118,15 +115,17 @@ exports.updateContract = async (req, res) => {
       //   }
 
 
+      
+
 
        Contract.findByIdAndUpdate(req.params.id, { $set: req.body })
       .then((contract) => {
         if (contract) {
           
-          console.log("contract",contract);
-          console.log("req.body",req.body);
-          console.log("car",req.body.car);
-          console.log("car contract",contract.car);
+          // console.log("contract",contract);
+          // console.log("req.body",req.body);
+          // console.log("car",req.body.car);
+          // console.log("car contract",contract.car);
 
 
 
@@ -170,7 +169,6 @@ exports.getContractById = async (req, res) => {
   try {
     const { id } = req.params;
     const car = await Contract.findById(id).populate("owner").populate("car");
-    console.log("conract", car);
 
     if (!car) {
       return res
@@ -186,7 +184,6 @@ exports.getContractById = async (req, res) => {
 exports.getAllContracts = async (req, res) => {
   try {
     const contracts = await Contract.find({}).populate("car").populate("owner");
-    console.log(contracts);
     return res.status(200).json(contracts);
   } catch (error) {
     return res.status(400).json({ status: 400, message: error.message });
@@ -216,7 +213,6 @@ exports.getAllContractsBackups = async (req, res) => {
       }
     ])
 
-    console.log("car",contracts);
     return res.status(200).json(contracts);
   } catch (error) {
     return res.status(400).json({ status: 400, message: error.message });

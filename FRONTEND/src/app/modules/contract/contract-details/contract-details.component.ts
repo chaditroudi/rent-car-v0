@@ -29,6 +29,8 @@ import { SearchComponent } from "src/app/shared/components/header/elements/searc
 import { CustomerModalComponent } from "../../customers/customer-modal/customer-modal.component";
 import { CustomerService } from "src/app/core/services/customer.service";
 import { Customer } from "src/app/core/models/customer.model";
+import { ReportService } from "src/app/core/services/report.service";
+import { Report } from "src/app/core/models";
 
 @Component({
   selector: "app-contract-details",
@@ -65,6 +67,7 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
   chossedCar: Car;
   car_id: any;
   selectedRadioValue = "";
+  status_contract:string;
 
   checkboxItems = [
     { id: "chk-ani", label: "Spare wheel", checked: false },
@@ -80,6 +83,7 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
   ];
   selectedItems: string[] = [];
 
+   reportData:Report ;
   onCheckboxChange() {
     this.selectedItems = this.checkboxItems
       .filter((item) => item.checked)
@@ -99,17 +103,16 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
+
+
+
+
     this.discount = 0;
     this.payable = 0;
     this.advance = 0;
     this.loadData();
     this.fetchAllCustomers();
     this.fetchAllCars();
-
-
-
-
-    
   }
   ngOnChanges(): void {
     this.loadData();
@@ -123,6 +126,7 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     config: NgbModalConfig,
     private modalService: NgbModal,
     private readonly contractService: ContractService,
+    private readonly reportService:ReportService,
     private toastr: ToastService,
     private formBuilder: FormBuilder,
     private customerService: CustomerService,
@@ -210,9 +214,6 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     });
   }
 
-
-  
-
   async editContractAlert(value: any, ContractId: number) {
     if (value == "Yes") {
       this.updateContract(ContractId);
@@ -220,14 +221,15 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     }
   }
 
+
   updateContract(contractId: number) {
-    
-    
-    
     this.contractService
       .get(contractId)
       .pipe(
         switchMap((res: Contract) => {
+          this.status_contract =this.selectedRadioValue
+
+          alert(this.status_contract)
           const updatedContract = createUpdatedContract(
             this.inputsValue,
             this.selectedCar && this.selectedCar._id
@@ -239,15 +241,19 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
             this.selectedItems,
             this.status,
 
+            this.status_contract,
+
             res
           );
 
           
-          return this.contractService.update(contractId, updatedContract);
+           return this.contractService.update(contractId, updatedContract);
+
+           
         })
       )
       .subscribe(
-        (response) => {
+        async(response) => {
           console.log("res", response);
 
           // if(response.attempts) {
@@ -256,6 +262,7 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
 
           // }
           if (response) {
+
             this.toastr.showSuccess("Contract updated successfully");
 
             this.loadData();
@@ -275,7 +282,7 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
   deleteContract(ContractId: number): void {
     this.contractService.delete(ContractId).subscribe(
       () => {
-        this.loadData()
+        this.loadData();
         this.toastr.showSuccess("Contract deleted successfully");
       },
       (err) => {
@@ -326,22 +333,13 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     this.contractService.contracts$.subscribe((res) => {
       this.formData = res;
 
-
-      this.formData.map((data)=> {
-    
-
-        this.checkboxItems.map((item,index)=> {
-
-          if(data.features == item.label) {
-
+      this.formData.map((data) => {
+        this.checkboxItems.map((item, index) => {
+          if (data.features == item.label) {
             item.checked == true;
-
-            
-
           }
         });
-        
-      })
+      });
     });
     [];
   }
@@ -387,6 +385,9 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
   @ViewChild("discount") inputdis: ElementRef;
   @ViewChild("sum") inputsum: ElementRef;
 
+  finalRes: number = 0;
+  noEditAlertModal :boolean = true;
+
   calculate() {
     if (this.inputsValue[26] == null || this.inputsValue[25] === null) {
       this.inputpayable.nativeElement.value = this.result;
@@ -399,33 +400,27 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     this.inputsValue[27] = this.inputpayable.nativeElement.value;
     this.inputsValue[26] = this.inputadv.nativeElement.value;
     this.inputsValue[24] = this.inputsum.nativeElement.value;
+
+    if ( parseInt(this.inputsValue[24]) ==0) {
+
+      this.noEditAlertModal = true;
+    }
+   
   }
 
-  @ViewChild("confirmationModal") 
-  
+  @ViewChild("confirmationModal")
   private modalComponent!: ConfirmationModalComponent;
 
   @ViewChild("editContractModal")
-
   private editContractModal!: ConfirmationModalComponent;
-
 
   async openEditContractModal() {
     return await this.editContractModal.open();
   }
-  
-
-
-
 
   async openModal() {
     return await this.modalComponent.open();
   }
-
-
-
-
-
 
   async getConfirmationValue(value: any, ContractId: number) {
     if (value == "Yes") {
@@ -496,15 +491,10 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     ]);
   }
 
-
   currentPage: number = 1;
   pageChanged(event: any) {
-
-
-    this.currentPage  = event.page;
-
+    this.currentPage = event.page;
 
     this.loadData();
-
   }
 }

@@ -25,7 +25,6 @@ exports.createCar = async (req, res) => {
       ...req.body,code:autoInc
     });
 
-    console.log("auto inc", autoInc);
     const result = await newcar.save();
 
     return res.status(201).json(result);

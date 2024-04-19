@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       this.toastr.showSuccess(res.msg);
 
 
+
       if(this.role == 3) {
         this.router.navigate(['/modules/reports']);
 

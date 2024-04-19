@@ -6,6 +6,7 @@ const customerRouter = require("./customer.routes");
 const userRouter = require("./user.routes");
 const statisticsRouter = require("./statistics.routes");
 
+const reportRouter = require('./report.routes')
 
 
 const adminRouter = require('./admin.routes');
@@ -20,5 +21,6 @@ router.use('/customer',customerRouter);
 router.use('/admin',adminRouter);
 router.use('/user',userRouter);
 router.use('/statistics',statisticsRouter);
+router.use('/report',reportRouter);
 
 module.exports = router;

@@ -54,7 +54,6 @@ const createUser = async (req, res) => {
       obj.role = req.body.role;
     }
 
-    console.log("user", obj);
 
     const user = new User(obj);
 
@@ -103,8 +102,7 @@ const createUser = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    console.log(req.user);
-    console.log(req.user._id);
+ 
     const users = await User.aggregate([
       {
         $match: {

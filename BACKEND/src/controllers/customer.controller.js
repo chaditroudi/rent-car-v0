@@ -4,7 +4,6 @@ const Customer = require('../models/customer.model');
 exports.createCustomer = async (req, res) => {
   try {
     const newCustomer = new Customer(req.body);
-    console.log("hii")
 
     
 

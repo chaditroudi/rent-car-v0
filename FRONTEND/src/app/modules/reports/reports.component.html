@@ -11,24 +11,24 @@
         <div class="card-header">
           <h5 class="text-primary">Rented Cars</h5>
           <div class="text-end"> 
-          <a appGeneratePdf printRented="printRented" [dataR]="carsRented" class="btn btn-primary"
+          <button appGeneratePdf printRented="printRented" [dataR]="carsRented" class="btn btn-info"
              ><i class="icon-printer mb-3"></i
-           ></a>btn btn-primary
-           </div>
+           >
+             </button>
         </div>
         <div class="card-body">
           <div class="product-list-custom custom-datatable">
-            <div *ngIf="cars.length > 0; else noData">
+            <div *ngIf="carsRented.length > 0; else noData ">
          <div id="printRented">
             <div class="table-responsive">
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Code</th>
+                      <th scope="col">Contrac</th>
                       <th scope="col">Car</th>
                       <th scope="col">Year</th>
                       <th scope="col">Plate</th>
-                      <th scope="col">Daily</th>
+                      <th scope="col">Action</th>
               
                     </tr>
                   </thead>
@@ -38,7 +38,7 @@
                       <td>{{ item.car }}</td>
                       <td>{{ item.year }}</td>
                       <td>{{  item.plate }}</td>
-                      <td>{{ item.daily }}</td>
+                      <td><a (click)="goToDetails()">Details</a></td>
                    
                     
                     </tr>
@@ -67,15 +67,15 @@
           <div class="card-header">
             <h5 class="text-success">Available Cars</h5>
             <div class="text-end">
-            <a appGeneratePdf printA="printA" [dataA]="carsA" class="btn btn-primary"
+            <button appGeneratePdf printA="printA" [dataA]="carsA" class="btn btn-info"
                ><i class="icon-printer mb-3"></i
-             ></a>
+             ></button>
              </div>
           </div>
           <div class="card-body">
             <div class="product-list-custom custom-datatable">
          
-              <div *ngIf="cars.length > 0; else noData">
+                <div *ngIf="carsA.length > 0; else noData">
                 <div id="printA">
                   <div class="table-responsive">
                     <table class="table">

@@ -166,7 +166,7 @@ export class CarDetailsComponent implements OnInit, OnChanges {
       (response) => {
         console.log(response);
         if (response) {
-          const index = this.formData.findIndex((car: Car) => car._id === carId);
+          const index = this.formData.findIndex((car: Car) => parseInt(car._id) === carId);
           if (index !== -1) {
             this.formData[index] = { ...this.formData[index], ...newCar };
           }
@@ -187,7 +187,7 @@ export class CarDetailsComponent implements OnInit, OnChanges {
 
   deleteCar(carId: number): void {
 
-    const index = this.formData.findIndex((car: Car) => car._id === carId);
+    const index = this.formData.findIndex((car: Car) => parseInt(car._id) === carId);
     if (index !== -1) {
       this.formData.splice(index, 1);
       if (this.formData.length % 1 === 0) {

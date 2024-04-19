@@ -84,10 +84,10 @@
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-                <div class="text-end">
-                  <button (click)="resetForm()" class="btn btn-success">
-                    {{ buttonAdd }}
-                  </button>
+              <div class="text-end">
+                <button (click)="resetForm()" class="btn btn-success">
+                  {{ buttonAdd }}
+                </button>
               </div>
             </div>
 
@@ -120,16 +120,19 @@
                             ></a>
 
                             <confirmation-modal
-                            #editContractModal
-                            (newConfirmationEvent)="
-                              editContractAlert($event, c._id)
-                            "
-                            modalStyle="modal-style-info"
-                            modalTitle="Edit contract"
-                            modalBody="you have payments available are you sure to update ?"
-                            modalButtonColor="btn btn-info"
-                            
-                          ></confirmation-modal>
+                              #editContractModal
+                              (newConfirmationEvent)="
+                                editContractAlert($event, c._id)
+                              "
+                              modalStyle="modal-style-info"
+                              modalTitle="Edit contract"
+                              [modalBody]="
+                                !noEditAlertModal
+                                  ? 'you have payments available are you sure to update ?'
+                                  : 'are you sure to edit contract?'
+                              "
+                              modalButtonColor="btn btn-info"
+                            ></confirmation-modal>
                           </li>
                           <li class="delete">
                             <a (click)="open()"
@@ -140,10 +143,10 @@
                                 (newConfirmationEvent)="
                                   getConfirmationValue($event, c._id)
                                 "
-                                    modalStyle="modal-style-info"
-                                    modalTitle="Delete contract"
-                                    modalBody="are you sure to delete contract?"
-                                    modalButtonColor="btn btn-danger"
+                                modalStyle="modal-style-info"
+                                modalTitle="Delete contract"
+                                modalBody="are you sure to delete contract?"
+                                modalButtonColor="btn btn-danger"
                               ></confirmation-modal>
                             </a>
                           </li>
@@ -537,17 +540,12 @@
                                         >
                                           <input
                                             type="checkbox"
-                                            [(ngModel)]="
-                                              item.checked
-                                            "
+                                            [(ngModel)]="item.checked"
                                             [ngModelOptions]="{
                                               standalone: true
                                             }"
-                                            (change)="
-                                              onCheckboxChange()
-                                            "
+                                            (change)="onCheckboxChange()"
                                             class="checkbox_animated"
-
                                           />
                                           {{ item.label }}
                                         </label>
@@ -704,198 +702,410 @@
                           <li [ngbNavItem]="2">
                             <a ngbNavLink>Payments</a>
                             <ng-template ngbNavContent>
-                              <div class="row g-4">
-                                <div class="col-md-6">
-                                  <div class="mb-3">
-                                    <div class="d-flex">
-                                      <input
-                                        type="text"
-                                        ng-model="daily_val1"
-                                        class="form-control"
-                                        [value]="amount ? amount : ''"
-                                        (change)="
-                                          onChangeInputValue($event, 30)
-                                        "
-                                        disabled
-                                      /><strong
-                                        style="color: black"
-                                        class="ps-1 pt-3 pe-1"
-                                        >X</strong
-                                      ><input
-                                        class="form-control"
-                                        type="text"
-                                        ng-model="daily_val2"
-                                        [value]="price ? price : ''"
-                                      />
-                                      <strong
-                                        style="color: black"
-                                        class="ps-1 pt-3 pe-1"
-                                        >=</strong
-                                      >
-                                      <input
-                                        type="text"
-                                        ng-model="val1"
-                                        class="form-control"
-                                        [value]="result ? result : ''"
-                                        (change)="
-                                          onChangeInputValue($event, 23)
-                                        "
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                              <div class="container">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <div class="row g-4">
+                                          <div class="col-md-6">
+                                            <div class="mb-3">
+                                              <div class="d-flex">
+                                                <input
+                                                  type="text"
+                                                  ng-model="daily_val1"
+                                                  class="form-control"
+                                                  [value]="amount ? amount : ''"
+                                                  (change)="
+                                                    onChangeInputValue(
+                                                      $event,
+                                                      30
+                                                    )
+                                                  "
+                                                  disabled
+                                                /><strong
+                                                  style="color: black"
+                                                  class="ps-1 pt-3 pe-1"
+                                                  >X</strong
+                                                ><input
+                                                  class="form-control"
+                                                  type="text"
+                                                  ng-model="daily_val2"
+                                                  [value]="price ? price : ''"
+                                                />
+                                                <strong
+                                                  style="color: black"
+                                                  class="ps-1 pt-3 pe-1"
+                                                  >=</strong
+                                                >
+                                                <input
+                                                  type="text"
+                                                  ng-model="val1"
+                                                  class="form-control"
+                                                  [value]="result ? result : ''"
+                                                  (change)="
+                                                    onChangeInputValue(
+                                                      $event,
+                                                      23
+                                                    )
+                                                  "
+                                                />
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
 
-                              <div
-                                class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
-                              >
-                                <div class="col-md-3 d-flex">
-                                  <input
-                                    type="number"
-                                    placeholder="Overtime"
-                                    class="form-control"
-                                  />
-                                </div>
-
-                                <div class="d-flex">
-                                  <button class="btn btn-primary">Set</button>
-                                </div>
-                              </div>
-
-                              <div
-                                class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
-                              >
-                                <div class="col-md-3 d-flex">
-                                  <input
-                                    type="number"
-                                    placeholder="Driver / Petrol"
-                                    class="form-control"
-                                  />
-                                </div>
-
-                                <div class="d-flex">
-                                  <button class="btn btn-primary">Calc</button>
-                                </div>
-                              </div>
-                              <div
-                                class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
-                              >
-                                <div class="col-md-3 d-flex">
-                                  <input
-                                    type="number"
-                                    placeholder="Fines"
-                                    class="form-control"
-                                  />
-                                </div>
-
-                                <div class="d-flex">
-                                  <button class="btn btn-primary">Show</button>
-                                </div>
-                              </div>
-                              <div
-                                class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
-                              >
-                                <div class="col-md-3 d-flex">
-                                  <input
-                                    type="number"
-                                    placeholder="Overdrive / Other"
-                                    class="form-control"
-                                  />
-                                </div>
-
-                                <div class="d-flex">
-                                  <button class="btn btn-primary">Set</button>
-                                </div>
-
-                                <hr class="mt-4 mb-4" />
-                                <table class="table table-striped">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">Advance</th>
-                                      <th scope="col">Discount</th>
-                                      <th scope="col">Sum</th>
-                                      <th scope="col">Payable</th>
-                                      <th scope="col">Calculate</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>
-                                        <input
-                                          #advance
-                                          type="text"
-                                          class="form-control"
-                                          [(ngModal)]="
-                                            advance ? advance : c.advance
-                                          "
-                                          (chnage)="
-                                            onChangeInputValue($event, 26)
-                                          "
-                                        />
-                                      </td>
-                                      <td>
-                                        <input
-                                          #discount
-                                          type="text"
-                                          class="form-control"
-                                          [(ngModal)]="
-                                            discount ? discount : c.discount
-                                          "
-                                          (change)="
-                                            onChangeInputValue($event, 25)
-                                          "
-                                        />
-                                      </td>
-                                      <td>
-                                        <input
-                                          #sum
-                                          type="text"
-                                          class="form-control"
-                                          [value]="result ? result : ''"
-                                          (change)="
-                                            onChangeInputValue($event, 24)
-                                          "
-                                        />
-                                      </td>
-                                      <td>
-                                        <input
-                                          #payable
-                                          type="text"
-                                          class="form-control"
-                                          [ngModal]="
-                                            payable ? payable : c.payable
-                                          "
-                                          (change)="
-                                            onChangeInputValue($event, 27)
-                                          "
-                                        />
-                                      </td>
-                                      <td>
-                                        <button
-                                          type="button"
-                                          class="btn btn-light"
-                                          (click)="calculate()"
+                                        <div
+                                          class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
                                         >
-                                          Calculate
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                              <div class="row">
-                                <div class="col-sm-12">
-                                  <div class="mb-3">
-                                    <div class="card-no-border">
-                                      <div class="card-header">
-                                        <h5>Current payments :</h5>
+                                          <div class="col-md-3 d-flex">
+                                            <div class="mb-3"></div>
+                                            <input
+                                              type="number"
+                                              placeholder="Overtime"
+                                              class="form-control"
+                                            />
+                                          </div>
+
+                                          <div class="d-flex">
+                                            <button class="btn btn-primary">
+                                              Set
+                                            </button>
+                                          </div>
+                                        </div>
+
+                                        <div
+                                          class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
+                                        >
+                                          <div class="col-md-3 d-flex">
+                                            <input
+                                              type="number"
+                                              placeholder="Driver / Petrol"
+                                              class="form-control"
+                                            />
+                                          </div>
+
+                                          <div class="d-flex">
+                                            <button class="btn btn-primary">
+                                              Calc
+                                            </button>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
+                                        >
+                                          <div class="col-md-3 d-flex">
+                                            <input
+                                              type="number"
+                                              placeholder="Fines"
+                                              class="form-control"
+                                            />
+                                          </div>
+
+                                          <div class="d-flex">
+                                            <button class="btn btn-primary">
+                                              Show
+                                            </button>
+                                          </div>
+                                        </div>
+                                        <div
+                                          class="row row-cols-sm-3 theme-form mt-3 form-bottom align-items-center g-2 ng-untouched ng-pristine ng-valid"
+                                        >
+                                          <div class="col-md-3 d-flex">
+                                            <input
+                                              type="number"
+                                              placeholder="Overdrive / Other"
+                                              class="form-control"
+                                            />
+                                          </div>
+
+                                          <div class="d-flex">
+                                            <button class="btn btn-primary">
+                                              Set
+                                            </button>
+                                          </div>
+                                        </div>
                                       </div>
-                                      <div class="car_body">
-                                        <div class="mb-3 p-4 m-t-15">
-                                          <p>discount:{{ c.discount }}</p>
-                                          <p>advance:{{ c.advance }}</p>
-                                          <p>payable:{{ c.payable }}</p>
-                                          <p>sum:{{ c.sum }}</p>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="table-responsive">
+                                        <table class="table d-none d-md-table">
+                                          <thead>
+                                            <tr>
+                                              <th scope="col">Advance</th>
+                                              <th scope="col">Discount</th>
+                                              <th scope="col">Sum</th>
+                                              <th scope="col">Payable</th>
+                                              <th scope="col">Calculate</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td>
+                                                <div class="form-group">
+                                                  <input
+                                                    #advance
+                                                    type="text"
+                                                    class="form-control"
+                                                    [(ngModal)]="
+                                                      advance
+                                                        ? advance
+                                                        : c.advance
+                                                    "
+                                                    (chnage)="
+                                                      onChangeInputValue(
+                                                        $event,
+                                                        26
+                                                      )
+                                                    "
+                                                  />
+                                                </div>
+                                              </td>
+
+                                              <td>
+                                                <div class="form-group">
+                                                  <input
+                                                    #discount
+                                                    type="text"
+                                                    class="form-control"
+                                                    [(ngModal)]="
+                                                      discount
+                                                        ? discount
+                                                        : c.discount
+                                                    "
+                                                    (change)="
+                                                      onChangeInputValue(
+                                                        $event,
+                                                        25
+                                                      )
+                                                    "
+                                                  />
+                                                </div>
+                                              </td>
+                                              <td>
+                                                <div class="form-group">
+                                                  <input
+                                                    #sum
+                                                    type="text"
+                                                    class="form-control"
+                                                    [value]="
+                                                      result ? result : ''
+                                                    "
+                                                    (change)="
+                                                      onChangeInputValue(
+                                                        $event,
+                                                        24
+                                                      )
+                                                    "
+                                                  />
+                                                </div>
+                                              </td>
+                                              <td>
+                                                <div class="form-group">
+                                                  <input
+                                                    #payable
+                                                    type="text"
+                                                    class="form-control"
+                                                    [ngModal]="
+                                                      payable
+                                                        ? payable
+                                                        : c.payable
+                                                    "
+                                                    (change)="
+                                                      onChangeInputValue(
+                                                        $event,
+                                                        27
+                                                      )
+                                                    "
+                                                  />
+                                                </div>
+                                              </td>
+                                              <td>
+                                                <button
+                                                  type="button"
+                                                  class="btn btn-light"
+                                                  (click)="calculate()"
+                                                >
+                                                  Calculate
+                                                </button>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                                        <div class="row">
+                                          <div class="col">
+                                            <div class="d-md-none">
+                                              <form class="mega-form">
+                                                <div class="form-group">
+                                                  <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                      <label
+                                                        class="col-form-label"
+                                                        >Advance</label
+                                                      >
+
+                                                      <input
+                                                        #advance
+                                                        type="text"
+                                                        class="form-control"
+                                                        [(ngModal)]="
+                                                          advance
+                                                            ? advance
+                                                            : c.advance
+                                                        "
+                                                        (chnage)="
+                                                          onChangeInputValue(
+                                                            $event,
+                                                            26
+                                                          )
+                                                        "
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                  <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                      <label
+                                                        class="col-form-label"
+                                                        >Discount</label
+                                                      >
+
+                                                      <input
+                                                        #discount
+                                                        type="text"
+                                                        class="form-control"
+                                                        [(ngModal)]="
+                                                          discount
+                                                            ? discount
+                                                            : c.discount
+                                                        "
+                                                        (change)="
+                                                          onChangeInputValue(
+                                                            $event,
+                                                            25
+                                                          )
+                                                        "
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                  <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                      <label
+                                                        class="col-form-label"
+                                                        >Result</label
+                                                      >
+
+                                                      <input
+                                                        #sum
+                                                        type="text"
+                                                        class="form-control"
+                                                        [value]="
+                                                          result ? result : ''
+                                                        "
+                                                        (change)="
+                                                          onChangeInputValue(
+                                                            $event,
+                                                            24
+                                                          )
+                                                        "
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                  <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                      <label
+                                                        class="col-form-label"
+                                                        >Payable</label
+                                                      >
+
+                                                      <input
+                                                        #payable
+                                                        type="text"
+                                                        class="form-control"
+                                                        [ngModal]="
+                                                          payable
+                                                            ? payable
+                                                            : c.payable
+                                                        "
+                                                        (change)="
+                                                          onChangeInputValue(
+                                                            $event,
+                                                            27
+                                                          )
+                                                        "
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </form>
+                                              <button
+                                                type="button"
+                                                class="btn btn-light"
+                                                (click)="calculate()"
+                                              >
+                                                Calculate
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col-md-12">
+                                            <div class="mb-3">
+                                              <div
+                                                class="card-no-border p-8 mt-4"
+                                              >
+                                                <ng-container
+                                                  *ngIf="
+                                                    +c.payable === 0 &&
+                                                    c.payable != null
+                                                  "
+                                                >
+                                                  <div
+                                                    role="alert"
+                                                    class="alert alert-success show fade"
+                                                  >
+                                                    Contract is Paid
+                                                  </div>
+                                                </ng-container>
+
+                                                <ng-container>
+                                                  <div class="card-header">
+                                                    <h5>Current payments :</h5>
+                                                  </div>
+                                                  <div class="car_body">
+                                                    <div
+                                                      class="mb-3 p-4 m-t-15"
+                                                    >
+                                                      <p>
+                                                        discount:{{
+                                                          c.discount
+                                                        }}
+                                                      </p>
+                                                      <p>
+                                                        advance:{{ c.advance }}
+                                                      </p>
+                                                      <p>
+                                                        payable:{{ c.payable }}
+                                                      </p>
+                                                      <p>sum:{{ c.sum }}</p>
+                                                    </div>
+                                                  </div>
+                                                </ng-container>
+                                              </div>
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>

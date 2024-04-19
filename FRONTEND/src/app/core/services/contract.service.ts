@@ -33,25 +33,24 @@ export class ContractService {
       'Authorization': `Bearer ${this.accessToken}`
     })
   }
-
   
 
   getContractById(id:string) :Observable<Contract> {
-    const headers = this.headers;
+    const headers = this.getHeaders();
     
     return this.http.get<Contract>(`${baseUrl}/contract/${id}` ,{headers});
 
   }
 
   getAutoInc() {
-    const headers = this.headers;
+    const headers = this.getHeaders();
     
     return this.http.get<any>(`${baseUrl}/contract/autoinc` ,{headers});
 
   }
 
   countContractOpen() {
-    const headers = this.headers;
+    const headers = this.getHeaders();
     
     return this.http.get<any>(`${baseUrl}/contract/count-open-contract` ,{headers});
 
@@ -64,7 +63,7 @@ export class ContractService {
   
 
   getContracts() {
-    const headers = this.headers;
+    const headers = this.getHeaders();
     
     return this.http.get<any[]>(`${baseUrl}/contract` ,{headers}).subscribe(data => {
       this.contractSource.next(data);
@@ -77,7 +76,7 @@ export class ContractService {
   backups:any;
   getContractsBackup() {
 
-    const headers = this.headers;
+    const headers = this.getHeaders();
     
     return this.http.get<any[]>(`${baseUrl}/contract/backups-contracts` ,{headers}).subscribe((data) => {
       this.contractSource.next(data)
@@ -86,13 +85,17 @@ export class ContractService {
 
 
   get(id: any) :Observable<Object> {
-    return this.http.get(`${baseUrl}/contract/${id}`);
+    const headers = this.getHeaders();
+
+    return this.http.get(`${baseUrl}/contract/${id}`,{headers});
   } 
 
   
 
   create(data: any) {
-    return this.http.post(`${baseUrl}/contract`,data).pipe(tap((newContract) =>{
+    const headers = this.getHeaders();
+
+    return this.http.post(`${baseUrl}/contract`,data,{headers}).pipe(tap((newContract) =>{
       const Contracts = this.contractSource.value;
       Contracts.push(newContract);
       this.contractSource.next(Contracts);
@@ -101,11 +104,15 @@ export class ContractService {
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/contract/${id}`, data);
+    const headers = this.getHeaders();
+
+    return this.http.put(`${baseUrl}/contract/${id}`, data,{headers});
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/contract/${id}`).pipe(tap(()=> {
+    const headers = this.getHeaders();
+
+    return this.http.delete(`${baseUrl}/contract/${id}`,{headers}).pipe(tap(()=> {
       const newData = this.contractSource.value.filter(item => item._id !==id);
       console.log("new data=",newData);
 

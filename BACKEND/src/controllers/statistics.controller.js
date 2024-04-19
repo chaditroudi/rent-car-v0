@@ -12,7 +12,6 @@ exports.countContractOpen = async (req, res) => {
 
 exports.countContractClosed = async (req, res) => {
   Contract.countDocuments({ status: "Contract is Closed" }).then((count) => {
-    console.log(count);
 
     return res.status(200).json(count);
   });
@@ -20,7 +19,6 @@ exports.countContractClosed = async (req, res) => {
 
 exports.countCarRented = async (req, res) => {
     Car.countDocuments({ rented:true }).then((count) => {
-      console.log(count);
   
       return res.status(200).json(count);
     });
@@ -28,7 +26,6 @@ exports.countCarRented = async (req, res) => {
   
   exports.countCarAvailable = async (req, res) => {
     Car.countDocuments({ rented:false }).then((count) => {
-      console.log(count);
   
       return res.status(200).json(count);
     });

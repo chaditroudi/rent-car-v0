@@ -1,3 +1,7 @@
+import { ViewerGuard } from './core/guards/viewer.guard';
+import { EditorGuard } from './core/guards/editor.guard';
+import { AdminGuard } from './core/guards/admin.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 import { FeatherIconComponent } from './shared/components/icons/feather-icon/feather-icon.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -65,7 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 //     // for Core use:
     LoadingBarModule
   ],
-  providers: [ CookieService],
+  providers: [ CookieService,AuthGuard,AdminGuard,EditorGuard,ViewerGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

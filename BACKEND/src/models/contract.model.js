@@ -121,6 +121,9 @@ const contractSchema = new mongoose.Schema({
         default:0
 
       },
+      status_contract:{
+        type:String
+      },
       amount:{
         type:Number,
         default:0
