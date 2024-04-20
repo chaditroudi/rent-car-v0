@@ -15,6 +15,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { ContractDetailsComponent } from "./contract-details/contract-details.component";
 import { ContractBackupsComponent } from "./contract-backups/contract-backups.component";
+import { AuthGuard } from 'src/app/core/guards';
 
 @NgModule({
   declarations: [
@@ -34,5 +35,8 @@ import { ContractBackupsComponent } from "./contract-backups/contract-backups.co
     FormsModule,
     ContractRoutingModule,
   ],
+  providers:[
+    AuthGuard
+  ]
 })
 export class ContractModule {}

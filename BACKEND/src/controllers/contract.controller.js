@@ -114,11 +114,23 @@ exports.updateContract = async (req, res) => {
       //     });
       //   }
 
+      if(contract.version > 2) {
+             return res.status(200).json({
+            status: 200,
+            message: "you can't update this contract",
+            attempts: true,
+          });
+      }
+
 
       
+      console.log("AAAAAAAAAAAAAAAAAAA",req.user);
+      const updatedBody = { ...req.body, version: contract.version +1 ,createdBy:req.user.email};
+
+      console.log("NEW CONTRACT")
 
 
-       Contract.findByIdAndUpdate(req.params.id, { $set: req.body })
+       Contract.findByIdAndUpdate(req.params.id, { $set: updatedBody })
       .then((contract) => {
         if (contract) {
           

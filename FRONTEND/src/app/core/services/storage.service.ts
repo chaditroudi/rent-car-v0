@@ -10,6 +10,7 @@ export class StorageService {
 
 
   private currentUser : User | null = null;
+  private isLoggedIn ="NOT_CONNECTED";
   private currentUserSource = new BehaviorSubject<User | null>(this.currentUser);
   public currentUser$:Observable<User | null> = this.currentUserSource.asObservable();
 
@@ -33,12 +34,25 @@ export class StorageService {
     this.currentUser = user;
     this.currentUserSource.next(this.currentUser);
     localStorage.setItem('user', JSON.stringify(user));
+    this.isLoggedIn = "CONNECTED";
+    localStorage.setItem('user_connected',this.isLoggedIn);
+  }
+
+  getIsLoggedIn() {
+    return localStorage.getItem('user_connected');
+
   }
 
   getCurrentUser():any | null {
       return localStorage.getItem('user');
     
     
+  }
+
+
+
+  storeUserRole(role: string) {
+    localStorage.setItem('user_role', role); 
   }
 
  

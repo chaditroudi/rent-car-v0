@@ -15,6 +15,8 @@ interface AuthResponse {
   role: number;
   msg: string;
   password: string;
+  success:boolean;
+  data:any;
   permission: {};
 }
 
@@ -22,7 +24,6 @@ interface AuthResponse {
   providedIn: "root",
 })
 export class AuthService {
-  private isAuthenticated: boolean = false;
 
   private user: User;
   role =0;
@@ -38,9 +39,6 @@ export class AuthService {
     }
   }
 
-  isAuthenticatedUser(): boolean {
-    return this.isAuthenticated;
-  }
 
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http
@@ -51,11 +49,18 @@ export class AuthService {
       )
       .pipe(
         tap((res) => {
-          this.isAuthenticated = true;
-          console.log("res", res);
-          console.log(this.userMangementService);
-          this.userMangementService.setToken(res.accessToken);
-          this.userMangementService.setCurrentUser(res);
+
+          if(res.success) {
+
+            console.log("res", res);
+            console.log(this.userMangementService);
+            this.userMangementService.setToken(res.accessToken);
+            this.userMangementService.setCurrentUser(res);
+            this.userMangementService.storeUserRole(res.data.role);
+          }
+
+          
+        
         }),
         shareReplay() 
       );
@@ -77,33 +82,14 @@ export class AuthService {
   // }
 
 
-  isLoggedIn() {
-    
-
-    if(this.isAuthenticatedUser) {
-      return true;
-    }
-
-    return false;
-
-  }
+  
 
 
-  isAdmin() {
-    return this.isLoggedIn()&& this.role == 1 ? true :false
-  }
-
-  isEditor() {
-    return this.isLoggedIn() && this.role == 2 ? true :false
-  }
-
-  isViewer() {
-    return this.isLoggedIn() && this.role == 3 ? true :false
-  }
 
   logout() {
     localStorage.removeItem("user");
-    this.isAuthenticated = false;
+    localStorage.removeItem("user_connected");
+
     this.router.navigate(["account/login"]);
   }
 }

@@ -11,7 +11,7 @@ import { PermissionsDetailsComponent } from "./permissions/permissions-details/p
 import { PermissionUpdateComponent } from "./permissions/permission-update/permission-update.component";
 import { MainComponent } from "./dashboard/main/main.component";
 import { ReportsComponent } from "./reports/reports.component";
-import { AdminEditorGuard, AdminGuard, AuthGuard, EditorGuard, ViewerGuard } from "../core/guards/index";
+import { AuthGuard } from "../core/guards";
 
 const routes: Routes = [
   {
@@ -20,57 +20,72 @@ const routes: Routes = [
       {
         path: "cars/car-details",
         component: CarDetailsComponent,
-        canActivate: [AuthGuard,AdminEditorGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1", "2"] } 
+
       },
       {
         path: "dashboard",
         component: MainComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1", "2"] } 
+
 
       },
 
       {
         path:"reports",
         component: ReportsComponent,
-        canActivate: [AuthGuard,ViewerGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1", "3"] } 
+
 
       },
 
       {
         path:"cars/cars-list",
         component: CarsListComponent,
-        canActivate: [AuthGuard,AdminEditorGuard]
+        canActivate: [AuthGuard]
 
       },
       {
         path:"customers/customers-list",
         component:CustomersListComponent,
-        canActivate: [AuthGuard,AdminEditorGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1", "2"] } 
+
 
       },
       {
         path:"customers/customers-add",
         component:CustomerAddComponent,
-        canActivate: [AuthGuard,AdminEditorGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1", "2"] } 
+
 
       },
       {
         path:"customers/customers-update/:id",
         component:CustomerUpdateComponent,
-        canActivate: [AuthGuard,AdminGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1", "2"] } 
+
 
       },
     
       {
         path:"permissions/permissions-details",
         component: PermissionsDetailsComponent,
-        canActivate: [AuthGuard,AdminGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1"] } 
 
       },
       {
         path:"permissions/permissions-update/:id",
         component: PermissionUpdateComponent,
-        canActivate: [AuthGuard,AdminGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ["1"] } 
+
 
       },
 

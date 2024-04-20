@@ -15,7 +15,7 @@ export class MyAccountComponent implements OnInit {
   public profileImg: "assets/images/dashboard/user-profile.png";
 
   constructor(public router: Router, private authService: AuthService, private userMangementServ: StorageService) {
-    if (this.authService.isLoggedIn()) {
+    if (this.userMangementServ.getIsLoggedIn() ==="CONNECTED") {
       console.log("true");
       
       console.log("userconnte",JSON.parse(this.userMangementServ.getCurrentUser()).data.name);

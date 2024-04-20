@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    }
 
   
 
@@ -48,19 +49,27 @@ export class LoginComponent implements OnInit {
       console.log("resultat login cp",res);
 
       
+
+      if(res.success) {
+
+        
+
+        
+      
       this.toastr.showSuccess(res.msg);
 
-
-
-      if(this.role == 3) {
-        this.router.navigate(['/modules/reports']);
+      if(res.data.role == 1 || res.data.role == 2) {
+        this.router.navigate(['/modules/dashboard'])
 
 
       }
-      else{
-        this.router.navigate(['/modules/dashboard']);
+      else if(res.data.role == 3 ){
+        this.router.navigate(['/modules/reports'])
 
       }
+
+    }
+
 
 
 

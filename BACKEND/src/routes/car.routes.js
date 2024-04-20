@@ -2,6 +2,9 @@ const express = require("express");
 const carRouter = express.Router();
 const carController = require("../controllers/car.controller");
 
+const auth = require('../middleware/auth.middleware');
+const { OnlyAdminCanAccess } = require('../middleware/admin.midlleware');
+
 /** POST Methods */
 /**
  * @openapi
@@ -88,10 +91,10 @@ const carController = require("../controllers/car.controller");
  *                   description: "A message detailing the result of the operation."
  */
 
-carRouter.post("/add-car", carController.createCar);
+carRouter.post("/add-car", auth,OnlyAdminCanAccess,carController.createCar);
 
 // Get all
-carRouter.get("/display-cars", carController.getAllCars);
+carRouter.get("/display-cars", auth,OnlyAdminCanAccess,carController.getAllCars);
 
 
 /**
@@ -205,7 +208,7 @@ carRouter.get("/get-car/:id", carController.getCarById);
  *                   type: string
  *                   description: "A message detailing the result of the operation."
  */
-carRouter.put("/update-car/:id", carController.updateCar);
+carRouter.put("/update-car/:id", auth,OnlyAdminCanAccess,carController.updateCar);
 
 
 /**

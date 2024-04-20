@@ -69,11 +69,14 @@
         <div class="col-xl-12">
           <div class="card">
             <div class="card-header">
-              <li class="text-end">
+
+            
+              
+              <div class="text-end">
                 <button class="btn btn-success" (click)="modal.open(content)">
                   Add new car
                 </button>
-              </li>
+              </div>
             </div>
 
             <div class="card-body">
@@ -85,10 +88,13 @@
                         | paginate : { itemsPerPage: 1, currentPage: p }
                     "
                   >
+                  
                     <div>
                       <div class="row">
                         <div class="col-md-12">
+                         
                           <ul class="action">
+                           
                             <li class="plus">
                               <a href="#"><i class="icon-plus-alt"></i></a>
                             </li>
@@ -509,6 +515,7 @@
                                     />
                                   </td>
                                 </tr>
+                                
                               </tbody>
                             </table>
                           </div>
@@ -517,6 +524,11 @@
                     </div>
 
                     <div class="card-footer text-end">
+                      <div class="text-start p-8">
+                        <span class="text-primary" *ngIf="c.createdBy">added by : {{c.createdBy}}</span>
+                        <span  class="text-primary" *ngIf="c.updatedBy">upateed by : {{c.updatedBy}}</span>
+                      </div>
+                      
                       <nav>
                         <div class="row">
                           <div class="m-t-15 btn-showcase">
@@ -528,7 +540,7 @@
                                   (pageChange)="pageChanged($event)"
 
                                   (pageBoundsCorrection)="pageChanged($event)"
-                                  maxSize="10"
+                                  maxSize="5"
                                   directionLinks="true"
                                   autoHide="true"
                                   responsive="true"

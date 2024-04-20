@@ -22,7 +22,7 @@ exports.createCar = async (req, res) => {
 
 
     const newcar = new Car({
-      ...req.body,code:autoInc
+      ...req.body,code:autoInc,createdBy:req.user.email
     });
 
     const result = await newcar.save();
@@ -69,7 +69,10 @@ exports.getCarById = async (req, res) => {
   };
 
 exports.updateCar = async (req, res) => {
-  await Car.findByIdAndUpdate(req.params.id, {$set: req.body})
+
+  
+  const updateCar = {...req.body,updatedBy:req.user.email}
+  await Car.findByIdAndUpdate(req.params.id, {$set: updateCar})
   .then((car) => {
     if(car) {
       return res.status(200).json({

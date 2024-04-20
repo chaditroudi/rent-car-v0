@@ -178,8 +178,8 @@ export class NavService implements OnDestroy {
           badgeValue: "1",
           active: false,
           children: [
-            { path: "/modules/contracts/contract-details", title: "Contract Page", type: "link" },
-            { path: "/modules/contracts/contract-backup", title: "Contract Backups", type: "link" },
+            { path: "/modules/contracts/contract/contract-details", title: "Contract Page", type: "link" },
+            { path: "/modules/contracts/contract/contract-backups", title: "Contract Backups", type: "link" },
           ],
         },
         {

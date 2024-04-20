@@ -16,7 +16,12 @@ const carSchema = new Schema({
     current:Number,
     insurance: Date,
     registration: Date,
-
+    createdBy:{
+        type:String
+      },
+      updatedBy:{
+        type:String
+      },
     engine_no: String,
     chassis_no: String,
     fuel: String,

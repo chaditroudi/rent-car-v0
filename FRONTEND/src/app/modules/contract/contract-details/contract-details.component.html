@@ -385,7 +385,12 @@
                             <input
                               type="number"
                               class="form-control"
-                              [value]="c.daily"
+                              [value]="
+                              daily && daily
+                                ? daily 
+                                : c.car?.daily 
+                                 
+                            "
                               (change)="onChangeInputValue($event, 12)"
                               [disabled]="c.daily !== ''"
                             />
@@ -413,8 +418,12 @@
                             <input
                               type="number"
                               class="form-control"
-                              [value]="c.weekly"
-                              (change)="onChangeInputValue($event, 13)"
+                              [value]="
+                              weekly && weekly
+                                ? weekly 
+                                : c.car?.weekly 
+                                 
+                            "                              (change)="onChangeInputValue($event, 13)"
                               [disabled]="c.weekly !== ''"
                             />
                           </div>
@@ -441,7 +450,10 @@
                             <input
                               type="number"
                               class="form-control"
-                              [value]="c.monthly"
+                              [value]="
+                              monthly && monthly
+                                ? monthly 
+                                : c.car?.monthly "
                               (change)="onChangeInputValue($event, 14)"
                               [disabled]="c.monthly !== ''"
                             />
@@ -469,8 +481,10 @@
                             <input
                               type="number"
                               class="form-control"
-                              [value]="c.annual"
-                              (change)="onChangeInputValue($event, 15)"
+                              [value]="
+                              annual && annual
+                                ? annual 
+                                : c.car?.annual "                              (change)="onChangeInputValue($event, 15)"
                               [disabled]="c.annual !== ''"
                             />
                           </div>
@@ -1139,7 +1153,7 @@
                                 (pageChange)="p = $event"
                                 (pageChange)="pageChanged($event)"
                                 (pageBoundsCorrection)="pageChanged($event)"
-                                maxSize="10"
+                                maxSize="5"
                                 directionLinks="true"
                                 autoHide="true"
                                 responsive="true"

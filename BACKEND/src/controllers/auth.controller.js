@@ -136,7 +136,9 @@ const loginUser = async(req, res) => {
         const user = {
             email: userData.email,
             role: userData.role,
-            _id:userData._id
+            _id:userData._id,
+            // createdBy:userData.createdBy,
+            // updateedBy:userData.updatedBy
 
         }
 

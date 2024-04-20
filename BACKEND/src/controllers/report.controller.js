@@ -164,3 +164,51 @@ exports.fetchMonthlyRep = async (req, res) => {
 }
 
 
+async function getCarsRentedInNextDays(days){
+ 
+  const today = new Date();
+  const nextWeek = new Date(today.setDate(today.getDate() + days));
+
+  const pipeline = [
+    {
+      $match:{
+        car_out:{$gte:tod}
+      }
+    }
+  ]
+}
+const { Contract } = require('../models/contract.model');
+
+async function getCarsRentedInNextDays(days) {
+  const today = new Date();
+  const nextWeek = new Date(today.setDate(today.getDate() + days));
+
+  const pipeline = [
+    {
+      $match: {
+        car_out: { $gte: today }, // Filter by car_out date (rental start) from today
+        car_back: { $lte: nextWeek }, // Filter by car_back date (rental end) within next 'days'
+      },
+    },
+    {
+      $count: 'totalRented', // Count the number of documents matching the filter
+    },
+  ];
+
+  const rentalCount = await Contract.aggregate(pipeline);
+  return rentalCount.length > 0 ? rentalCount[0].totalRented : 0;
+}
+
+// Example usage (replace with desired number of days)
+const days = 7;
+
+getCarsRentedInNextDays(days)
+  .then(count => {
+    console.log(`Number of cars rented in the next ${days} days: ${count}`);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+
+

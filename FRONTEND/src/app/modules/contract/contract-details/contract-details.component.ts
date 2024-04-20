@@ -229,7 +229,6 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
         switchMap((res: Contract) => {
           this.status_contract =this.selectedRadioValue
 
-          alert(this.status_contract)
           const updatedContract = createUpdatedContract(
             this.inputsValue,
             this.selectedCar && this.selectedCar._id
@@ -263,6 +262,12 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
           // }
           if (response) {
 
+            if(response.attempts){
+           
+              return this.toastr.showError("You cannot update contract more than 2 times");
+
+            }
+
             this.toastr.showSuccess("Contract updated successfully");
 
             this.loadData();
@@ -292,6 +297,11 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
     );
   }
 
+  daily ="";
+  weekly ="";
+  monthly ="";
+  annual ="";
+
   async chooseCar(carItem: Car) {
     this.selectedCarData =
       this.selectedCar.car +
@@ -301,6 +311,14 @@ export class ContractDetailsComponent implements OnChanges, OnInit {
       this.selectedCar.plate;
 
     console.log("car id ", this.selectedCar._id);
+
+    this.daily = this.selectedCar.daily;
+    this.weekly = this.selectedCar.weekly;
+    this.monthly = this.selectedCar.monthly;
+    this.annual = this.selectedCar.annual;
+
+
+
   }
 
   async chooseCustomer(cus: Customer) {

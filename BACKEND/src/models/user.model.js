@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
     },
     expDate:{
       type:Date
-    }
+    },
+
 })
 
 module.exports = mongoose.model('User', userSchema);

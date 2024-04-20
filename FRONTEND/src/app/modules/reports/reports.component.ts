@@ -33,6 +33,7 @@ export class ReportsComponent implements OnInit {
     this.reportService.reports$.subscribe((data:any) => {
       this.reports = data;
       
+      
 
       this.carsRented = data.rentedCars || [];
       this.carsA = data.availableCars || [];
