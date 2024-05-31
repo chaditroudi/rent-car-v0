@@ -19,3 +19,9 @@ node_modules/
 # Ignore dependency management files
 package-lock.json
 yarn.lock
+
+env
+
+uploads/
+
+dist/
